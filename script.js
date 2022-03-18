@@ -1,12 +1,24 @@
 
 
-const input = document.querySelectorAll('.input')
-const box = document.querySelectorAll('.box')
-const priceAI = document.querySelectorAll('.price__AI span')
-const totalLiters = document.querySelector('.total_liters span')
+
+const box = document.querySelectorAll('.box') // select what tank is needed
+const price__AI = document.querySelectorAll('.box__price .price__AI') // input for box names
+const box__price = document.querySelectorAll('.box__price .input') // input for box price
+const totalLiters = document.querySelector('.total_liters')
+// output vars
 const petrolType = document.querySelector('.type span')
 const totalPrice = document.querySelector('.total_price span')
-const priceForOneLiter = document.querySelector('.price-for-one-liter span')
+const priceForOneLiter = document.querySelector('.pricePerLiter span')
+const total_liters = document.querySelector('.totalLiters span')
+const vat = document.querySelector('.tax span')
+
+// pre set values
+let VAT = 5;
+box[0].classList.add('show');
+let tankName = price__AI[0]; // selects the 1st tank name
+let tankPrice = box__price[0]; // selects the 1st tank price
+
+
 
 //<section class="price">
 //     <div class="container">
@@ -24,16 +36,42 @@ const priceForOneLiter = document.querySelector('.price-for-one-liter span')
 //     </div>
 // </section>
 
-box.forEach((item) =>{
+box.forEach((item, index) =>{
     item.addEventListener('click', () =>{
         box.forEach((item) =>{
             item.classList.remove('show')
         })
-        item.classList.add('show')
-        totalPrice.value = `${totalPrice}$`
+
+        item.classList.add('show');
+        tankName = price__AI[index];
+        tankPrice = box__price[index];
     })
 
 })
+
+function getTicket() {
+
+    liters = totalLiters.value;
+    // gets the total without tax
+    subTotal = (tankPrice.value * liters)
+    // gets the tax cost to add on
+    tax = (subTotal * (VAT / 100))
+    // adds the tax to the subtotal
+    total = (tax + subTotal)
+
+    petrolType.innerHTML = tankName.innerHTML;
+    priceForOneLiter.innerHTML = `$${Number(tankPrice.value).toFixed(2)}`;
+    total_liters.innerHTML = Number(liters).toFixed(2);
+    vat.innerHTML = `${Number(VAT).toFixed(2)}% ($${Number(tax).toFixed(2)})`
+    totalPrice.innerHTML = `$${Number(total).toFixed(2)}`;
+}
+
+getTicket();
+
+//price__AI[index].innerHTML = name of tank
+// box__price[index].value = price of the tank
+// totalLiters.value = total liters
+// vat = (box__price[index].value * (VAT / 100))
 
 
 // input.value = ''
