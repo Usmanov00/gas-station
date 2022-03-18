@@ -19,6 +19,7 @@ body{
 }
 p{
     font-weight: 700;
+    align-items: center;
 }
 
 .car{
@@ -61,6 +62,7 @@ p{
     margin-bottom: 9px;
     transition: 0.3s;
 
+
 }
 
 .show{
@@ -68,9 +70,6 @@ p{
     background: linear-gradient(180deg, #30B3BB 0%, #BAFBFF 100%);
     cursor: pointer;
 }
-
-
-
 
 .box__price{
     width: 228px;
